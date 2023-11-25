@@ -1,0 +1,19 @@
+config:
+  target: 'http://localhost:8080'
+  phases:
+    - duration: 30
+      arrivalRate: 3
+      name: Warm up
+  payload:
+    path: "id-password.csv"
+    fields:
+      - "id"
+      - "password"
+scenarios:
+  - name: "just login"
+    flow:
+      - post:
+          url: "/login-with-id-password"
+          json:
+            id: "{{ id }}"
+            password: "{{ password }}"
