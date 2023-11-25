@@ -1,0 +1,30 @@
+config:
+  target: 'http://localhost:8080'
+  phases:
+    - duration: 30
+      arrivalRate: 3
+      name: Warm up
+    - duration: 30
+      arrivalRate: 3
+      rampTo: 100
+      name: Ramp up load
+    - duration: 60
+      arrivalRate: 30
+      name: Sustained load
+    - duration: 30
+      arrivalRate: 30
+      rampTo: 10
+      name: End of load
+scenarios:
+  - name: "login and use some functions"
+    flow:
+      - post:
+          url: "/login"
+      - get:
+          url: "/some-function-one"
+      - get:
+          url: "/some-function-two"
+  - name: "just login"
+    flow:
+      - post:
+          url: "/login"
