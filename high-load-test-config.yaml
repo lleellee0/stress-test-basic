@@ -1,0 +1,26 @@
+config:
+  target: 'http://localhost:8080'
+  phases:
+    - duration: 30
+      arrivalRate: 20
+      name: Warm up
+    - duration: 10
+      arrivalRate: 20
+      rampTo: 200
+      name: Ramp up load
+    - duration: 10
+      arrivalRate: 200
+      name: Sustained load
+    - duration: 30
+      arrivalRate: 200
+      rampTo: 20
+      name: End of load
+scenarios:
+  - name: "high load cpu"
+    flow:
+      - get:
+          url: "/high-load-cpu"
+#  - name: "high load memory"
+#    flow:
+#      - get:
+#          url: "/high-load-memory"
