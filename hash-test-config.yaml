@@ -1,0 +1,15 @@
+config:
+  target: 'http://localhost:8080'
+  phases:
+    - duration: 60
+      arrivalRate: 30
+  payload:
+    path: "numbers.csv"
+    fields:
+      - "number"
+scenarios:
+  - name: "get hash"
+    flow:
+      - get:
+          url: "/no-cache-hash-string?input={{ number }}"
+#          url: "/cached-hash-string?input={{ number }}"
