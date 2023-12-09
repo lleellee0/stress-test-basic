@@ -6,29 +6,27 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 @RestController
 public class HashController {
 
-    private final Map<String, String> hashHashResult = new ConcurrentHashMap<>();
+    private final Map<String, String> cashHashResult = new ConcurrentHashMap<>();
 
     @GetMapping("/no-cache-hash-string")
-    public String hashString(@RequestParam String input) {
+    public String noCacheHashString(@RequestParam String input) {
         return calculateHash(input);
     }
 
     @GetMapping("/cached-hash-string")
     public String cachedHashString(@RequestParam String input) {
-        if (hashHashResult.containsKey(input)) {
-            return hashHashResult.get(input);
+        if (cashHashResult.containsKey(input)) {
+            return cashHashResult.get(input);
         }
 
         String hashedResult = calculateHash(input);
-        hashHashResult.put(input, hashedResult);
+        cashHashResult.put(input, hashedResult);
         return hashedResult;
     }
 
